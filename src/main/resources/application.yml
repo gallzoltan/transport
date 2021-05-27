@@ -1,0 +1,13 @@
+spring:
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+  datasource:
+    url: jdbc:postgresql://0.0.0.0:5432/transport
+    username: gallz
+    password: gzaltf1
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
