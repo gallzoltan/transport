@@ -27,4 +27,10 @@ public class AddressService {
 	public Address getOneAddress(Long id) {
 		return addressRepository.findAddress(id);
 	}
+
+	@Transactional
+	public Address delete(Long id) {
+		addressRepository.deleteById(id);
+		return null;
+	}
 }
