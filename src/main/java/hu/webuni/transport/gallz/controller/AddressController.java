@@ -1,9 +1,12 @@
 package hu.webuni.transport.gallz.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +27,16 @@ public class AddressController {
 	@Autowired
 	AddressMapper addressMapper;
 	
+	@GetMapping
+	public List<AddressDto> getAllAddresses(){
+		return addressMapper.addressesToDtos(addressService.getAllAddress());
+	}
+	
 	@PostMapping
 	public AddressDto createAddress(@RequestBody @Valid AddressDto addressDto) {
-		if(addressDto.equals(null) || !(addressDto.getId()==null)) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-		} else
+		if(!(addressDto.equals(null)) || (addressDto.getId()==null)) {
 			return addressMapper.addressToDto(addressService.save(addressMapper.dtoToAddress(addressDto)));
+		} else
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 	}
 }
