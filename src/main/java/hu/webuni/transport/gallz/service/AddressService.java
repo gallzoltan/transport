@@ -1,7 +1,6 @@
 package hu.webuni.transport.gallz.service;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +22,9 @@ public class AddressService {
 	
 	public List<Address> getAllAddress(){
 		return addressRepository.findAll();
+	}
+
+	public Address getOneAddress(Long id) {
+		return addressRepository.findAddress(id);
 	}
 }
