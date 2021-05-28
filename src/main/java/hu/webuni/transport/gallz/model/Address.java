@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -14,16 +15,13 @@ public class Address {
     private Long id;
 	
 	@Size(min=2, max=2)
-	private String contry;
+	@NotBlank
+	private String country;
 	private String zipcode;
 	private String city;
 	private String street;
 	private String house;
-	
-	@Size(min=-90, max=90)
 	private Float latitude;
-	
-	@Size(min=-180, max=180)
 	private Float longitude;
 	
 	@OneToOne(mappedBy = "address")
@@ -31,17 +29,17 @@ public class Address {
 
 	public Address() {}
 
-	public Address(String contry, String zipcode, String city, String street, String house, Float latitude,
-			float longitude, Milestone milestone) {
-		this.contry = contry;
-		this.zipcode = zipcode;
-		this.city = city;
-		this.street = street;
-		this.house = house;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.milestone = milestone;
-	}
+//	public Address(String contry, String zipcode, String city, String street, String house, Float latitude,
+//			float longitude, Milestone milestone) {
+//		this.contry = contry;
+//		this.zipcode = zipcode;
+//		this.city = city;
+//		this.street = street;
+//		this.house = house;
+//		this.latitude = latitude;
+//		this.longitude = longitude;
+//		this.milestone = milestone;
+//	}
 
 	public Long getId() {
 		return id;
@@ -51,12 +49,12 @@ public class Address {
 		this.id = id;
 	}
 
-	public String getContry() {
-		return contry;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setContry(String contry) {
-		this.contry = contry;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public String getZipcode() {
