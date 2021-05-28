@@ -1,5 +1,7 @@
 package hu.webuni.transport.gallz.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +25,8 @@ public class AddressController {
 	AddressMapper addressMapper;
 	
 	@PostMapping
-	public AddressDto createAddress(@RequestBody AddressDto addressDto) {
-		if(addressDto.equals(null)) {
+	public AddressDto createAddress(@RequestBody @Valid AddressDto addressDto) {
+		if(addressDto.equals(null) || !(addressDto.getId()==null)) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		} else
 			return addressMapper.addressToDto(addressService.save(addressMapper.dtoToAddress(addressDto)));
