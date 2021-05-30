@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,9 +68,17 @@ public class AddressController {
 			addressDto.setId(id);
 			Address updatedAddress = addressService.update(addressMapper.dtoToAddress(addressDto));
 			if(updatedAddress == null) 
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND); //ResponseEntity.notFound().build();
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 			else 
-				return addressMapper.addressToDto(updatedAddress); //ResponseEntity.ok(addressMapper.addressToDto(updatedAddress));
+				return addressMapper.addressToDto(updatedAddress);
 		}
+	}
+	
+	@PostMapping("/search")
+	public List<AddressDto> findByAddress(@RequestBody AddressDto example) {
+		if(!example.equals(null))
+			return addressMapper.addressesToDtos(addressService.findAddressByExample(addressMapper.dtoToAddress(example)));
+		else
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 	}
 }

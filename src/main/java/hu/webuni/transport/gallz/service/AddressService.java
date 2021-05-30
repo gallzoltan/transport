@@ -5,7 +5,10 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import hu.webuni.transport.gallz.model.Address;
 import hu.webuni.transport.gallz.repository.AddressRepository;
@@ -42,5 +45,32 @@ public class AddressService {
 		} else {			
 			return addressRepository.save(address);
 		}
+	}
+	
+	public List<Address> findAddressByExample(Address example){
+		String country = example.getCountry();
+		String city = example.getCity();
+		String zipcode = example.getZipcode();
+		String street = example.getStreet();
+		
+		Specification<Address> spec = Specification.where(null);
+		
+		if(StringUtils.hasText(country)) {
+			spec = spec.and(AddressSpecification.hasCountry(country));
+		}
+		
+		if(StringUtils.hasText(city)) {
+			spec = spec.and(AddressSpecification.hasCity(city));
+		}
+		
+		if(StringUtils.hasText(zipcode)) {
+			spec = spec.and(AddressSpecification.hasZipcode(zipcode));
+		}
+		
+		if(StringUtils.hasText(street)) {
+			spec = spec.and(AddressSpecification.hasStreet(street));
+		}
+		
+		return addressRepository.findAll(spec, Sort.by("city"));
 	}
 }

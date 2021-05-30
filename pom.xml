@@ -76,9 +76,9 @@
 							<version>${org.mapstruct.version}</version>
 						</path>
 						<!-- other annotation processors -->
-						<!--path> <groupId>org.hibernate</groupId> <artifactId>hibernate-jpamodelgen</artifactId> 
+						<path> <groupId>org.hibernate</groupId> <artifactId>hibernate-jpamodelgen</artifactId> 
 							<version>5.4.31.Final</version> 
-							</path -->
+							</path>
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
