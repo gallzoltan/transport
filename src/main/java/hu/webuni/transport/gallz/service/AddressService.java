@@ -5,11 +5,13 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import hu.webuni.transport.gallz.dto.AddressFilterDto;
 import hu.webuni.transport.gallz.model.Address;
 import hu.webuni.transport.gallz.repository.AddressRepository;
 
@@ -47,7 +49,7 @@ public class AddressService {
 		}
 	}
 	
-	public List<Address> findAddressByExample(Address example){
+	public Page<Address> findAddressByExample(AddressFilterDto example, Pageable pageable){
 		String country = example.getCountry();
 		String city = example.getCity();
 		String zipcode = example.getZipcode();
@@ -71,6 +73,6 @@ public class AddressService {
 			spec = spec.and(AddressSpecification.hasStreet(street));
 		}
 		
-		return addressRepository.findAll(spec, Sort.by("city"));
+		return addressRepository.findAll(spec, pageable);
 	}
 }

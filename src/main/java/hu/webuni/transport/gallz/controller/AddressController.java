@@ -1,11 +1,14 @@
 package hu.webuni.transport.gallz.controller;
 
 import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import hu.webuni.transport.gallz.dto.AddressDto;
+import hu.webuni.transport.gallz.dto.AddressFilterDto;
 import hu.webuni.transport.gallz.model.Address;
 import hu.webuni.transport.gallz.mapper.AddressMapper;
 import hu.webuni.transport.gallz.service.AddressService;
@@ -74,10 +78,15 @@ public class AddressController {
 		}
 	}
 	
-	@PostMapping("/search")
-	public List<AddressDto> findByAddress(@RequestBody AddressDto example) {
-		if(!example.equals(null))
-			return addressMapper.addressesToDtos(addressService.findAddressByExample(addressMapper.dtoToAddress(example)));
+	@PostMapping(value = "/search")
+	public ResponseEntity<List<AddressDto>> findByAddress(@RequestBody AddressFilterDto example, Pageable pageable) {
+		if(!example.equals(null)) {
+			Page<Address> pg = addressService.findAddressByExample(example, pageable);			
+			HttpHeaders httpHeaders = new HttpHeaders();
+		    httpHeaders.add("X-Total-Count", String.valueOf(pg.getTotalElements()));
+			return new ResponseEntity<>(addressMapper.addressesToDtos(pg.getContent()), httpHeaders, HttpStatus.OK);
+			//return addressMapper.addressesToDtos(pg.getContent());
+		}			
 		else
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 	}
