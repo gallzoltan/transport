@@ -29,17 +29,13 @@ public class Address {
 
 	public Address() {}
 
-//	public Address(String contry, String zipcode, String city, String street, String house, Float latitude,
-//			float longitude, Milestone milestone) {
-//		this.contry = contry;
-//		this.zipcode = zipcode;
-//		this.city = city;
-//		this.street = street;
-//		this.house = house;
-//		this.latitude = latitude;
-//		this.longitude = longitude;
-//		this.milestone = milestone;
-//	}
+	public Address(String contry, String zipcode, String city, String street, String house) {
+		this.country = contry;
+		this.zipcode = zipcode;
+		this.city = city;
+		this.street = street;
+		this.house = house;
+	}
 
 	public Long getId() {
 		return id;

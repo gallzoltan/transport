@@ -23,7 +23,6 @@ public class Milestone {
 	public Milestone() {}
 
 	public Milestone(LocalDateTime plannedTime, Address address) {
-		super();
 		this.plannedTime = plannedTime;
 		this.address = address;
 	}
