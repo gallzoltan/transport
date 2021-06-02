@@ -6,8 +6,33 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 
+@NamedEntityGraph(
+		name = "TransportPlan-entity-graph", 
+		attributeNodes = { 
+			@NamedAttributeNode("income"),
+			@NamedAttributeNode("sections"), 
+		}
+	)
+@NamedEntityGraph(
+		name = "TransportPlan-entity-graph-with-milestone", 
+		attributeNodes = { 
+				@NamedAttributeNode("income"),
+				@NamedAttributeNode(value = "sections", subgraph = "sectioins-subgraph"), 
+			},
+		subgraphs = {
+			@NamedSubgraph(
+				name = "sectioins-subgraph",
+				attributeNodes = {
+					@NamedAttributeNode("fromMilestone")
+				}
+			)
+		}
+	)
 @Entity
 public class TransportPlan {
 	

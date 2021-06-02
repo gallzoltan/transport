@@ -32,10 +32,16 @@ public class TransportController {
 	@Autowired
 	MilestoneRepository milestoneRepository;
 	
+//	@GetMapping
+//	public List<Section> getAllSection(){
+//		return sectionRepository.findAll();
+//	}
+	
+	
 	@GetMapping
-	public List<Section> getAllSection(){
-		return sectionRepository.findAllSection(9L);
-	}
+	public List<TransportPlan> getAllTransport(){
+		return transportplanRepository.findAllWithSection();
+	}	
 
 	@PostMapping("/{id}/delay")
 	public void registerDelay(@PathVariable Long id, @RequestBody DelayDto delayDto) {
