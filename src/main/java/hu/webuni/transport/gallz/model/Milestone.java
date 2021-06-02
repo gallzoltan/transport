@@ -16,8 +16,7 @@ public class Milestone {
     private Long id;
 	private LocalDateTime plannedTime;
 	
-	@OneToOne
-	@JoinColumn(name = "address_id", referencedColumnName = "id")
+	@OneToOne(mappedBy = "milestone")
 	private Address address;
 
 	public Milestone() {}

@@ -3,6 +3,7 @@ package hu.webuni.transport.gallz.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -24,7 +25,8 @@ public class Address {
 	private Float latitude;
 	private Float longitude;
 	
-	@OneToOne(mappedBy = "address")
+	@OneToOne
+	//@JoinColumn(name = "milestone_id", referencedColumnName = "id")
 	private Milestone milestone;
 
 	public Address() {}

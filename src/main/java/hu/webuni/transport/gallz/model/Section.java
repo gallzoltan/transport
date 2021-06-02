@@ -31,7 +31,6 @@ public class Section {
 		this.sectNumber = sectNumber;
 	}
 
-
 	public Long getId() {
 		return id;
 	}
