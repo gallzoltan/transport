@@ -1,10 +1,12 @@
 package hu.webuni.transport.gallz.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -25,9 +27,8 @@ public class Address {
 	private Float latitude;
 	private Float longitude;
 	
-	@OneToOne
-	//@JoinColumn(name = "milestone_id", referencedColumnName = "id")
-	private Milestone milestone;
+	@OneToMany(mappedBy = "address")
+	private List<Milestone> milestones;
 
 	public Address() {}
 
@@ -103,12 +104,18 @@ public class Address {
 		this.longitude = longitude;
 	}
 
-	public Milestone getMilestone() {
-		return milestone;
+	public List<Milestone> getMilestones() {
+		return milestones;
 	}
 
-	public void setMilestone(Milestone milestone) {
-		this.milestone = milestone;
+	public void setMilestones(List<Milestone> milestones) {
+		this.milestones = milestones;
 	}
 	
+	public void addMilestone(Milestone milestone) {
+		if(this.milestones==null)
+			this.milestones = new ArrayList<>();
+		this.milestones.add(milestone);
+		milestone.setAddress(this);
+	}
 }

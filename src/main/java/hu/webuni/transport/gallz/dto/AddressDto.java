@@ -5,15 +5,20 @@ import javax.validation.constraints.Size;
 
 public class AddressDto {
     private Long id;	
+    
     @Size(min=2, max=2)
     @NotBlank
 	private String country;
+    
     @NotBlank
 	private String zipcode;
+    
     @NotBlank
 	private String city;
+    
     @NotBlank
 	private String street;
+    
     @NotBlank
 	private String house;	
 	
