@@ -27,8 +27,8 @@ public class Address {
 	private Float latitude;
 	private Float longitude;
 	
-	@OneToMany(mappedBy = "address")
-	private List<Milestone> milestones;
+	//@OneToMany(mappedBy = "address")
+	//private List<Milestone> milestones;
 
 	public Address() {}
 
@@ -104,18 +104,18 @@ public class Address {
 		this.longitude = longitude;
 	}
 
-	public List<Milestone> getMilestones() {
-		return milestones;
-	}
-
-	public void setMilestones(List<Milestone> milestones) {
-		this.milestones = milestones;
-	}
-	
-	public void addMilestone(Milestone milestone) {
-		if(this.milestones==null)
-			this.milestones = new ArrayList<>();
-		this.milestones.add(milestone);
-		milestone.setAddress(this);
-	}
+//	public List<Milestone> getMilestones() {
+//		return milestones;
+//	}
+//
+//	public void setMilestones(List<Milestone> milestones) {
+//		this.milestones = milestones;
+//	}
+//	
+//	public void addMilestone(Milestone milestone) {
+//		if(this.milestones==null)
+//			this.milestones = new ArrayList<>();
+//		this.milestones.add(milestone);
+//		milestone.setAddress(this);
+//	}
 }

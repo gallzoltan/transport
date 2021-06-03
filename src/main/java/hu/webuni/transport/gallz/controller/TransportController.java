@@ -38,9 +38,9 @@ public class TransportController {
 //	}
 	
 	
-	@GetMapping
-	public List<TransportPlan> getAllTransport(){
-		return transportplanRepository.findAllWithSection();
+	@GetMapping("/{id}")
+	public TransportPlan getTransportById(@PathVariable Long id){
+		return transportplanRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}	
 
 	@PostMapping("/{id}/delay")

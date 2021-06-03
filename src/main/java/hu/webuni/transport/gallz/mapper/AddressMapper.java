@@ -15,7 +15,7 @@ public interface AddressMapper {
 	
 	AddressDto addressToDto(Address address);
 	
-	@Mapping(ignore = true, target = "milestones")
+	//@Mapping(ignore = true, target = "milestones")
 	Address dtoToAddress(@Valid AddressDto addressDto);
 	
 	List<AddressDto> addressesToDtos(List<Address> address);

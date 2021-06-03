@@ -12,27 +12,25 @@ import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 
 @NamedEntityGraph(
-		name = "TransportPlan-entity-graph", 
-		attributeNodes = { 
-			@NamedAttributeNode("income"),
-			@NamedAttributeNode("sections"), 
-		}
-	)
-@NamedEntityGraph(
-		name = "TransportPlan-entity-graph-with-milestone", 
-		attributeNodes = { 
-				@NamedAttributeNode("income"),
-				@NamedAttributeNode(value = "sections", subgraph = "sectioins-subgraph"), 
-			},
-		subgraphs = {
-			@NamedSubgraph(
-				name = "sectioins-subgraph",
-				attributeNodes = {
-					@NamedAttributeNode("fromMilestone")
-				}
-			)
-		}
-	)
+	name = "TransportPlan-entitygraph-full", 
+	attributeNodes = { 
+			@NamedAttributeNode(value = "sections", subgraph = "sectioins-subgraph"), 
+		},
+	subgraphs = {
+		@NamedSubgraph(
+			name = "sectioins-subgraph",
+			attributeNodes = { @NamedAttributeNode(value = "fromMilestone", subgraph="address-subgraph") }
+		),
+		@NamedSubgraph(
+			name = "sectioins-subgraph",
+			attributeNodes = { @NamedAttributeNode(value = "toMilestone", subgraph="address-subgraph") }
+		),
+		@NamedSubgraph(
+			name = "address-subgraph",
+			attributeNodes = { @NamedAttributeNode("address") }
+		)
+	}
+)
 @Entity
 public class TransportPlan {
 	
