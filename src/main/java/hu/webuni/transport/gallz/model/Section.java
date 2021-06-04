@@ -3,37 +3,37 @@ package hu.webuni.transport.gallz.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedSubgraph;
+import javax.persistence.OneToOne;
 
-@NamedEntityGraph(
-		name = "Section-entity-graph", 
-		attributeNodes = { 
-			@NamedAttributeNode("fromMilestone"),
-			@NamedAttributeNode("toMilestone"),
-			@NamedAttributeNode("transportplan"), 
-		}
-)
-
-@NamedEntityGraph(
-	name = "Section-entity-graph-with-address", 
-	attributeNodes = { 
-		@NamedAttributeNode(value = "fromMilestone", subgraph = "milestone-subgraph"),
-		@NamedAttributeNode(value = "toMilestone", subgraph = "milestone-subgraph"),
-		@NamedAttributeNode("transportplan"), 
-	},
-	subgraphs = {
-		@NamedSubgraph(
-			name = "milestone-subgraph",
-			attributeNodes = {
-				@NamedAttributeNode("address")
-			}
-		)
-	}
-)
+//@NamedEntityGraph(
+//		name = "Section-entity-graph", 
+//		attributeNodes = { 
+//			@NamedAttributeNode("fromMilestone"),
+//			@NamedAttributeNode("toMilestone"),
+//			@NamedAttributeNode("transportplan"), 
+//		}
+//)
+//
+//@NamedEntityGraph(
+//	name = "Section-entity-graph-with-address", 
+//	attributeNodes = { 
+//		@NamedAttributeNode(value = "fromMilestone", subgraph = "milestone-subgraph"),
+//		@NamedAttributeNode(value = "toMilestone", subgraph = "milestone-subgraph"),
+//		@NamedAttributeNode("transportplan"), 
+//	},
+//	subgraphs = {
+//		@NamedSubgraph(
+//			name = "milestone-subgraph",
+//			attributeNodes = {
+//				@NamedAttributeNode("address")
+//			}
+//		)
+//	}
+//)
 @Entity
 public class Section {
 	
@@ -42,15 +42,12 @@ public class Section {
     private Long id;
 	
 	@ManyToOne
-	@JoinColumn
 	private Milestone fromMilestone;
 	
 	@ManyToOne
-	@JoinColumn
 	private Milestone toMilestone;
 	
 	@ManyToOne
-	@JoinColumn
 	private TransportPlan transportplan;
 	
 	private Integer sectNumber;

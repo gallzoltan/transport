@@ -12,7 +12,7 @@ import hu.webuni.transport.gallz.model.TransportPlan;
 public interface TransportplanRepository extends JpaRepository<TransportPlan, Long> {
 
 	@EntityGraph("TransportPlan-entitygraph-full")
-	@Query("SELECT t FROM TransportPlan t")
+	@Query("SELECT t FROM TransportPlan t WHERE t.id=:id")
 	Optional<TransportPlan> findById(Long id);
 
 }

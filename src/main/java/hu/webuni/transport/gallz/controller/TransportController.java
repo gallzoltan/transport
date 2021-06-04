@@ -31,13 +31,7 @@ public class TransportController {
 	
 	@Autowired
 	MilestoneRepository milestoneRepository;
-	
-//	@GetMapping
-//	public List<Section> getAllSection(){
-//		return sectionRepository.findAll();
-//	}
-	
-	
+		
 	@GetMapping("/{id}")
 	public TransportPlan getTransportById(@PathVariable Long id){
 		return transportplanRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

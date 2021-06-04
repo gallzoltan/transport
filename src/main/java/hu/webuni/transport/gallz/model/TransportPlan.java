@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 @NamedEntityGraph(
 	name = "TransportPlan-entitygraph-full", 
 	attributeNodes = { 
-			@NamedAttributeNode(value = "sections", subgraph = "sectioins-subgraph"), 
-		},
+		@NamedAttributeNode(value = "sections", subgraph = "sectioins-subgraph"), 
+	},
 	subgraphs = {
 		@NamedSubgraph(
 			name = "sectioins-subgraph",
@@ -35,8 +35,8 @@ import javax.persistence.OneToMany;
 public class TransportPlan {
 	
 	@Id
-    @GeneratedValue
-    private Long id;
+	@GeneratedValue
+	private Long id;
 	
 	private Long income;
 	

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Milestone {
@@ -18,6 +19,9 @@ public class Milestone {
 	
 	@ManyToOne
 	private Address address;
+	
+//	@OneToOne
+//	private Section section;
 
 	public Milestone() {}
 
@@ -49,5 +53,13 @@ public class Milestone {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+//
+//	public Section getSection() {
+//		return section;
+//	}
+//
+//	public void setSection(Section section) {
+//		this.section = section;
+//	}
 		
 }
