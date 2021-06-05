@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import hu.webuni.transport.gallz.dto.DelayDto;
+import hu.webuni.transport.gallz.service.DelayService;
+import hu.webuni.transport.gallz.service.IncomeService;
 import hu.webuni.transport.gallz.service.MilestoneService;
 import hu.webuni.transport.gallz.service.SectionService;
 import hu.webuni.transport.gallz.service.TransportPlanService;
@@ -25,13 +27,20 @@ public class TransportController {
 	SectionService sectionService;
 	
 	@Autowired
-	MilestoneService milestoneService;	
+	MilestoneService milestoneService;
+	
+	@Autowired
+	DelayService delayService;
+	
+	@Autowired
+	IncomeService incomeService;
 
 	@PostMapping("/{id}/delay")
 	public void registerDelay(@PathVariable Long id, @RequestBody DelayDto delayDto) {
 		if(transportplanService.checkExists(id) && milestoneService.checkExists(delayDto.getId())) {
 			if(sectionService.checkThatMilestoneInSection(id, delayDto.getId())) {
-				milestoneService.adjustMilestone(id, delayDto.getId(), delayDto.getDelay());
+				delayService.adjustMilestone(id, delayDto.getId(), delayDto.getDelay());
+				incomeService.adjustIncome(id, delayDto.getDelay());
 			}
 			else throw new ResponseStatusException(HttpStatus.BAD_REQUEST);		
 		} else {

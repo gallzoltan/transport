@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import hu.webuni.transport.gallz.model.TransportPlan;
 
-public interface TransportplanRepository extends JpaRepository<TransportPlan, Long> {
+public interface TransportPlanRepository extends JpaRepository<TransportPlan, Long> {
 
 	@EntityGraph("TransportPlan-full")
 	@Query("SELECT t FROM TransportPlan t WHERE t.id=:id")

@@ -1,3 +1,9 @@
+transports:
+  incomeDeclinePercentage:
+    for30min: 0
+    for60min: 10
+    for120min: 20
+    from120min: 30
 spring:
   mvc:
     format:

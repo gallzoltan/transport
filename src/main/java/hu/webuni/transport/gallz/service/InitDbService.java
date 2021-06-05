@@ -13,7 +13,7 @@ import hu.webuni.transport.gallz.model.TransportPlan;
 import hu.webuni.transport.gallz.repository.AddressRepository;
 import hu.webuni.transport.gallz.repository.MilestoneRepository;
 import hu.webuni.transport.gallz.repository.SectionRepository;
-import hu.webuni.transport.gallz.repository.TransportplanRepository;
+import hu.webuni.transport.gallz.repository.TransportPlanRepository;
 
 @Service
 public class InitDbService {
@@ -28,7 +28,7 @@ public class InitDbService {
 	SectionRepository sectionRepository;
 	
 	@Autowired
-	TransportplanRepository transportplanRepository;
+	TransportPlanRepository transportplanRepository;
 	
 	@Transactional
 	public void initDb() {

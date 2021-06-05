@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import hu.webuni.transport.gallz.model.TransportPlan;
-import hu.webuni.transport.gallz.repository.TransportplanRepository;
+import hu.webuni.transport.gallz.repository.TransportPlanRepository;
 
 @Service
 public class TransportPlanService {
 
 	@Autowired
-	TransportplanRepository transportplanRepository;
+	TransportPlanRepository transportplanRepository;
 	
 	public Boolean checkExists(Long id) {
 		return transportplanRepository.existsById(id);
