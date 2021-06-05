@@ -31,7 +31,7 @@ public class TransportController {
 	public void registerDelay(@PathVariable Long id, @RequestBody DelayDto delayDto) {
 		if(transportplanService.checkExists(id) && milestoneService.checkExists(delayDto.getId())) {
 			if(sectionService.checkThatMilestoneInSection(id, delayDto.getId())) {
-				//transportplanService.adjustMilestone(id, delayDto.getId(), delayDto.getDelay());
+				milestoneService.adjustMilestone(delayDto.getId(), delayDto.getDelay());
 			}
 			else throw new ResponseStatusException(HttpStatus.BAD_REQUEST);		
 		} else {

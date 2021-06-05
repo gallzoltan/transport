@@ -18,7 +18,7 @@ public class TransportPlanService {
 		return transportplanRepository.existsById(id);
 	}
 	
-	public void adjustMilestone(Long transportplanId) {
-		TransportPlan transportplan = transportplanRepository.findById(transportplanId).orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-	}
+//	public void adjustMilestone(Long transportplanId, Long milestoneId, int milestoneDelay) {
+//		TransportPlan transportplan = transportplanRepository.findById(transportplanId).orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST));		
+//	}
 }
