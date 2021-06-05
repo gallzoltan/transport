@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Milestone {
@@ -18,6 +18,7 @@ public class Milestone {
 	private LocalDateTime plannedTime;
 	
 	@ManyToOne
+	@JoinColumn(name = "address_id")
 	private Address address;
 	
 //	@OneToOne

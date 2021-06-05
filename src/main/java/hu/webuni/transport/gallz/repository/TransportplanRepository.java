@@ -1,6 +1,5 @@
 package hu.webuni.transport.gallz.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -11,7 +10,7 @@ import hu.webuni.transport.gallz.model.TransportPlan;
 
 public interface TransportplanRepository extends JpaRepository<TransportPlan, Long> {
 
-	@EntityGraph("TransportPlan-entitygraph-full")
+	@EntityGraph("TransportPlan-full")
 	@Query("SELECT t FROM TransportPlan t WHERE t.id=:id")
 	Optional<TransportPlan> findById(Long id);
 

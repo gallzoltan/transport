@@ -12,7 +12,7 @@ import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 
 @NamedEntityGraph(
-	name = "TransportPlan-entitygraph-full", 
+	name = "TransportPlan-full", 
 	attributeNodes = { 
 		@NamedAttributeNode(value = "sections", subgraph = "sectioins-subgraph"), 
 	},

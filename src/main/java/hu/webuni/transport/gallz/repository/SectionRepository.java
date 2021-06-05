@@ -10,8 +10,10 @@ import hu.webuni.transport.gallz.model.Section;
 
 public interface SectionRepository extends JpaRepository<Section, Long>  {
 
-	@EntityGraph("Section-entity-graph")
-	@Query("SELECT s FROM Section s")
-	List<Section> findAll();
+	//@EntityGraph()
+	@Query("SELECT s FROM Section s "
+			+ "WHERE s.transportplan.id = :transportPlanId "
+			+ "AND (s.fromMilestone.id = :milestoneId OR s.toMilestone.id = :milestoneId)")
+	List<Section> findByTransportAndMilestoneId(Long transportPlanId, Long milestoneId);
 
 }
