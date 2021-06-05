@@ -37,16 +37,17 @@ public class InitDbService {
 		Address a3 = addressRepository.save(new Address("HU", "1234", "asdfg", "dfrtgb utca", "44"));
 		
 		Milestone m1 = milestoneRepository.save(new Milestone(LocalDateTime.now(), a1));
-		Milestone m2 = milestoneRepository.save(new Milestone(LocalDateTime.now(), a2));
-		Milestone m3 = milestoneRepository.save(new Milestone(LocalDateTime.now(), a3));
+		Milestone m2 = milestoneRepository.save(new Milestone(LocalDateTime.now().plusHours(3), a2));
+		Milestone m3 = milestoneRepository.save(new Milestone(LocalDateTime.now().plusHours(4), a2));
+		Milestone m4 = milestoneRepository.save(new Milestone(LocalDateTime.now().plusHours(8), a3));
 		
 		Section s1 = sectionRepository.save(new Section(1, m1, m2));
-		Section s2 = sectionRepository.save(new Section(2, m2, m3));
+		Section s2 = sectionRepository.save(new Section(2, m3, m4));
 		
 		TransportPlan t1 = transportplanRepository.save(new TransportPlan());
 		t1.addSection(s1);
 		t1.addSection(s2);
-		t1.setIncome(0L);
+		t1.setIncome(100L);
 	}
 
 }
