@@ -14,9 +14,11 @@ public class SectionService {
 	@Autowired
 	SectionRepository sectionRepository;
 
-	public List<Section> checkThatMilestoneInSection(Long transportplanId, Long milestoneId) {
+	public Boolean checkThatMilestoneInSection(Long transportplanId, Long milestoneId) {
 		List<Section> sectionsWithMilestones = sectionRepository.findByTransportAndMilestoneId(transportplanId, milestoneId);
-		
-		return sectionsWithMilestones;
+		if(sectionsWithMilestones.equals(null))
+			return false;
+		else
+			return true;
 	}	
 }

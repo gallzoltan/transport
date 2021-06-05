@@ -30,7 +30,10 @@ public class TransportController {
 	@PostMapping("/{id}/delay")
 	public void registerDelay(@PathVariable Long id, @RequestBody DelayDto delayDto) {
 		if(transportplanService.checkExists(id) && milestoneService.checkExists(delayDto.getId())) {
-			transportplanService.findById(id);			
+			if(sectionService.checkThatMilestoneInSection(id, delayDto.getId())) {
+				//transportplanService.adjustMilestone(id, delayDto.getId(), delayDto.getDelay());
+			}
+			else throw new ResponseStatusException(HttpStatus.BAD_REQUEST);		
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
