@@ -17,7 +17,7 @@ import hu.webuni.transport.gallz.service.SectionService;
 import hu.webuni.transport.gallz.service.TransportPlanService;
 
 @RestController
-@RequestMapping("/api/transportPlan")
+@RequestMapping("/api/transportPlans")
 public class TransportController {
 	
 	@Autowired
