@@ -47,7 +47,7 @@ public class InitDbService {
 		TransportPlan t1 = transportplanRepository.save(new TransportPlan());
 		t1.addSection(s1);
 		t1.addSection(s2);
-		t1.setIncome(100L);
+		t1.setIncome(1000L);
 	}
 
 }
