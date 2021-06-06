@@ -3,7 +3,12 @@ transports:
     limits:
       30: 10
       60: 20
-      120: 30  
+      120: 30 
+  jwt:
+    issuer: TransportApp
+    alg: HMAC512
+    secret: "barbi"
+    duration: 10m 
 spring:
   mvc:
     format:
