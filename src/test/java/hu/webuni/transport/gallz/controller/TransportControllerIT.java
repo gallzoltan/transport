@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import hu.webuni.transport.gallz.dto.DelayDto;
 import hu.webuni.transport.gallz.dto.LoginDto;
+import hu.webuni.transport.gallz.service.InitDbService;
 
 @AutoConfigureTestDatabase
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -20,12 +21,17 @@ public class TransportControllerIT {
 	
 	private static final String BASE_URI = "/api/transportPlans";
 	private String jwtToken;
+	private Long transportplanId;
 	
 	@Autowired
 	WebTestClient webTestClient;
+	
+	@Autowired
+	InitDbService initDbService;
 		
 	@BeforeEach
 	public void init() {
+		transportplanId = initDbService.initDb().getId();
 		LoginDto body = new LoginDto("transportUser", "passwd");
 		jwtToken = webTestClient.post()
 				.uri("/api/login")
@@ -36,19 +42,18 @@ public class TransportControllerIT {
 	
 	@Test
 	public void testThatTransportplanIdDoesNotFound() throws Exception {
-		Long transportplanId = 12L;
 		DelayDto delayDto = new DelayDto();
 		delayDto.setId(7L);
 		delayDto.setDelay(120);
 		webTestClient.post()
-			.uri(String.format("%s/%s/delay", BASE_URI, transportplanId))
+			.uri(String.format("%s/%s/delay", BASE_URI, transportplanId + 1))
 				.headers(headers -> headers.setBearerAuth(jwtToken)).bodyValue(delayDto).exchange().expectStatus()
 				.isNotFound();
 	}
 	
 	@Test
 	public void testThatMilestoneIdNotPartOfTransportPlan() throws Exception {
-		Long transportplanId = 11L;
+		//Long transportplanId = 11L;
 		DelayDto delayDto = new DelayDto();
 		delayDto.setId(8L);
 		delayDto.setDelay(120);
@@ -60,7 +65,7 @@ public class TransportControllerIT {
 	
 	@Test
 	public void testThatIncreaseThePlannedTimeAtMilestone() {
-		// 
+		//
 	}
 	
 	public void testThatExpectedRevenuePercentageReduction() {

@@ -31,10 +31,10 @@ public class InitDbService {
 	TransportPlanRepository transportplanRepository;
 	
 	@Transactional
-	public void initDb() {
+	public TransportPlan initDb() {
 		Address a1 = addressRepository.save(new Address("HU", "5630", "Békés", "Hargitta utca", "31"));
 		Address a2 = addressRepository.save(new Address("HU", "2120", "Dunakeszi", "Benedek utca", "6"));
-		Address a3 = addressRepository.save(new Address("HU", "1234", "asdfg", "dfrtgb utca", "44"));
+		Address a3 = addressRepository.save(new Address("SK", "1234", "asdfg", "dfrtgb utca", "44"));
 		
 		Milestone m1 = milestoneRepository.save(new Milestone(LocalDateTime.now(), a1));
 		Milestone m2 = milestoneRepository.save(new Milestone(LocalDateTime.now().plusHours(3), a2));
@@ -49,6 +49,8 @@ public class InitDbService {
 		t1.addSection(s1);
 		t1.addSection(s2);
 		t1.setIncome(1000L);
+		
+		return t1;
 	}
 
 }

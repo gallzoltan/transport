@@ -22,10 +22,12 @@ public class DelayService {
 		Long toId = null;
 		Integer maxSectNumber = sectionService.findMaxSectionById(transportplanId);
 		Section section = sectionService.findByMilestoneId(milestoneId).get();		
+		
 		if(section.getFromMilestone().getId() == milestoneId) {
 			fromId = milestoneId;
 			toId = section.getToMilestone().getId();			
 		}
+		
 		if(section.getToMilestone().getId() == milestoneId) {
 			if(section.getSectNumber() < maxSectNumber) {
 				Integer nextSectNumber = section.getSectNumber() + 1;
@@ -37,6 +39,7 @@ public class DelayService {
 				fromId = null;
 			}
 		}
+		
 		if(fromId != null)
 			milestoneService.incrementPlannedTime(fromId, delay);
 		if(toId != null)
