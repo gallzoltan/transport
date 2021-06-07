@@ -8,7 +8,7 @@ transports:
     issuer: TransportApp
     alg: HMAC512
     secret: "barbi"
-    duration: 10m 
+    duration: 10m  
 spring:
   mvc:
     format:

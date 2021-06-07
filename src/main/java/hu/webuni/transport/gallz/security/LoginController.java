@@ -1,4 +1,4 @@
-package hu.webuni.transport.gallz.controller;
+package hu.webuni.transport.gallz.security;
 
 import javax.validation.Valid;
 
@@ -12,21 +12,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.webuni.transport.gallz.dto.LoginDto;
-import hu.webuni.transport.gallz.security.JwtService;
 
 @RestController
 public class LoginController {
 	
 	@Autowired
-	AuthenticationManager authenticationManager;
+	AuthenticationManager authManager;
 	
 	@Autowired
 	JwtService jwtService;
 	
 	@PostMapping("/api/login")
 	public String login(@RequestBody @Valid LoginDto loginDto) {
-		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
-		return jwtService.createJwtToken((UserDetails)authentication.getPrincipal());
+		Authentication auth = authManager.authenticate(	new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));		
+		return jwtService.createJwtToken((UserDetails)auth.getPrincipal());
 	}
 }

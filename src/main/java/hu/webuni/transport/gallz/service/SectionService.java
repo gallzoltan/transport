@@ -29,7 +29,7 @@ public class SectionService {
 
 	public Boolean checkThatMilestoneInSection(Long transportplanId, Long milestoneId) {
 		List<Section> sectionsWithMilestones = sectionRepository.findByTransportAndMilestoneId(transportplanId, milestoneId);
-		if(sectionsWithMilestones.equals(null))
+		if(sectionsWithMilestones.isEmpty())
 			return false;
 		else
 			return true;

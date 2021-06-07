@@ -5,6 +5,11 @@ public class DelayDto {
 	private Long id;	
 	private Integer delay;
 
+	public DelayDto(Long id, Integer delay) {
+		this.id = id;
+		this.delay = delay;
+	}
+
 	public DelayDto() {
 	}
 

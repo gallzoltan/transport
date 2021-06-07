@@ -40,6 +40,7 @@ public class InitDbService {
 		Milestone m2 = milestoneRepository.save(new Milestone(LocalDateTime.now().plusHours(3), a2));
 		Milestone m3 = milestoneRepository.save(new Milestone(LocalDateTime.now().plusHours(4), a2));
 		Milestone m4 = milestoneRepository.save(new Milestone(LocalDateTime.now().plusHours(8), a3));
+		Milestone m5 = milestoneRepository.save(new Milestone(LocalDateTime.now().plusHours(1), a1));
 		
 		Section s1 = sectionRepository.save(new Section(1, m1, m2));
 		Section s2 = sectionRepository.save(new Section(2, m3, m4));
