@@ -5,10 +5,10 @@ transports:
       60: 20
       120: 30 
   jwt:
-    issuer: TransportApp
+    issuer: TransportTestApp
     alg: HMAC512
     secret: "secret"
-    duration: 10m 
+    duration: 1m 
 logging:
   level:
     org:
