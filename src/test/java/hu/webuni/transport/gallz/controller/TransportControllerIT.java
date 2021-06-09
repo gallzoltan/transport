@@ -32,7 +32,6 @@ public class TransportControllerIT {
 	
 	private static final String BASE_URI = "/api/transportPlans";
 	private String jwtToken;
-	private Long transportplanId;
 	
 	@Autowired
 	WebTestClient webTestClient;
@@ -63,8 +62,6 @@ public class TransportControllerIT {
 				.bodyValue(body).exchange()
 				.expectBody(String.class)
 				.returnResult().getResponseBody();
-		//initDbService.deleteAllTables();
-		//transportplanId = initDbService.initDb().getId();
 	}
 	
 	@Test
