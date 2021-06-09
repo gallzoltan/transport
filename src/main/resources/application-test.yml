@@ -1,3 +1,9 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
 transports:
   incomeDeclinePercentage:
     limits:

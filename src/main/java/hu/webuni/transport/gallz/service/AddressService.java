@@ -40,6 +40,11 @@ public class AddressService {
 		return null;
 	}
 	
+	@Transactional
+	public void deleteAll() {
+		addressRepository.deleteAll();
+	}	
+	
 	@Transactional	
 	public Address update(Address address) {
 		if(!addressRepository.existsById(address.getId())) {

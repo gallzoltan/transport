@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import hu.webuni.transport.gallz.model.Section;
 import hu.webuni.transport.gallz.repository.SectionRepository;
@@ -14,6 +15,10 @@ public class SectionService {
 	
 	@Autowired
 	SectionRepository sectionRepository;	
+	
+	public List<Section> getAllSections() {
+		return sectionRepository.findAll();
+	}
 	
 	public Optional<Section> findByMilestoneId(Long milestoneId) {
 		return sectionRepository.findByMilestoneId(milestoneId);
@@ -34,4 +39,11 @@ public class SectionService {
 		else
 			return true;
 	}	
+	
+	@Transactional
+	public void deleteAll() {
+		getAllSections().stream().forEach(s -> s.setFromMilestone(null));
+		getAllSections().stream().forEach(s -> s.setToMilestone(null));
+		sectionRepository.deleteAll();
+	}
 }

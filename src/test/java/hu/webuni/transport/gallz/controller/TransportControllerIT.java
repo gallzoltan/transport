@@ -32,7 +32,7 @@ public class TransportControllerIT {
 	
 	private static final String BASE_URI = "/api/transportPlans";
 	private String jwtToken;
-	//private Long transportplanId;
+	private Long transportplanId;
 	
 	@Autowired
 	WebTestClient webTestClient;
@@ -57,18 +57,14 @@ public class TransportControllerIT {
 		
 	@BeforeEach
 	public void init() {
-//		addressRepository.deleteAll();
-//		sectionRepository.deleteAll();
-//		milestoneRepository.deleteAll();
-//		transportPlanRepository.deleteAll();
-//		transportplanId = initDbService.initDb().getId();
-		
-		LoginDto body = new LoginDto("transportUser", "passwd");
+		LoginDto body = new LoginDto("Administrator", "passwd");
 		jwtToken = webTestClient.post()
 				.uri("/api/login")
 				.bodyValue(body).exchange()
 				.expectBody(String.class)
 				.returnResult().getResponseBody();
+		//initDbService.deleteAllTables();
+		//transportplanId = initDbService.initDb().getId();
 	}
 	
 	@Test
@@ -90,7 +86,7 @@ public class TransportControllerIT {
 	}
 	
 	@Test
-	public void testThatThePlannedTimeAtMilestoneWasIncreased() throws Exception {		
+	public void testThatThePlannedTimeAtMilestoneWasIncreased() throws Exception {
 		DelayDto delayDto = new DelayDto(7L, 30);
 		Milestone milestoneBefore = milestoneRepository.findById(delayDto.getId()).get();
 		LocalDateTime plannedTimeBefore = milestoneBefore.getPlannedTime();

@@ -17,7 +17,18 @@ import hu.webuni.transport.gallz.repository.TransportPlanRepository;
 
 @Service
 public class InitDbService {
-
+	@Autowired
+	AddressService addressService;
+	
+	@Autowired
+	MilestoneService milestoneService;
+	
+	@Autowired
+	SectionService sectionService;
+	
+	@Autowired
+	TransportPlanService transportPlanService;
+	
 	@Autowired
 	AddressRepository addressRepository;
 	
@@ -52,5 +63,12 @@ public class InitDbService {
 		
 		return t1;
 	}
-
+	
+	@Transactional
+	public void deleteAllTables() {		
+		transportPlanService.deleteAll();
+		sectionService.deleteAll();
+		milestoneService.deleteAll();	
+		addressService.deleteAll();
+	}
 }
