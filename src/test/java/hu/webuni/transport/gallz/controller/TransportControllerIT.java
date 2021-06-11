@@ -23,7 +23,6 @@ import hu.webuni.transport.gallz.repository.AddressRepository;
 import hu.webuni.transport.gallz.repository.MilestoneRepository;
 import hu.webuni.transport.gallz.repository.SectionRepository;
 import hu.webuni.transport.gallz.repository.TransportPlanRepository;
-import hu.webuni.transport.gallz.service.InitDbService;
 
 @AutoConfigureTestDatabase
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -35,10 +34,7 @@ public class TransportControllerIT {
 	
 	@Autowired
 	WebTestClient webTestClient;
-	
-	@Autowired
-	InitDbService initDbService;
-	
+		
 	@Autowired
 	TransportConfigProperties config;
 	
@@ -75,27 +71,27 @@ public class TransportControllerIT {
 	
 	@Test
 	public void testThatMilestoneIdNotPartOfTransportPlan() throws Exception {
-		DelayDto delayDto = new DelayDto(8L, 120);
+		DelayDto delayDto = new DelayDto(9L, 120);
 		webTestClient.post()
-			.uri(String.format("%s/%s/delay", BASE_URI, 11L))
+			.uri(String.format("%s/%s/delay", BASE_URI, 12L))
 				.headers(headers -> headers.setBearerAuth(jwtToken)).bodyValue(delayDto).exchange().expectStatus()
 				.isBadRequest();
 	}
 	
 	@Test
 	public void testThatThePlannedTimeAtMilestoneWasIncreased() throws Exception {
-		DelayDto delayDto = new DelayDto(7L, 30);
+		DelayDto delayDto = new DelayDto(8L, 30);
 		Milestone milestoneBefore = milestoneRepository.findById(delayDto.getId()).get();
 		LocalDateTime plannedTimeBefore = milestoneBefore.getPlannedTime();
-		registerDelayIsOk(11L, delayDto);
+		registerDelayIsOk(12L, delayDto);
 		Milestone milestoneAdjusted = milestoneRepository.findById(delayDto.getId()).get();
 		assertThat(milestoneAdjusted.getPlannedTime()).isEqualTo(plannedTimeBefore.plusMinutes(delayDto.getDelay()));
 	}
 	
 	@Test
 	public void testTheExpectedRevenuePercentageReduction() throws Exception {
-		Long transportplanId = 11L;
-		DelayDto delayDto = new DelayDto(7L, 30);
+		Long transportplanId = 12L;
+		DelayDto delayDto = new DelayDto(8L, 30);
 		TransportPlan transportplanBefore = transportPlanRepository.findById(transportplanId).get();
 		Long incomeBefore = transportplanBefore.getIncome();
 		Long incomeExpected = (incomeBefore * (100 - getIncomeDeclinePercentage(delayDto.getDelay()))) / 100;
