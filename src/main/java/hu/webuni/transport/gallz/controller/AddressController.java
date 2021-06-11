@@ -60,7 +60,7 @@ public class AddressController {
 	
 	@DeleteMapping("/{id}")
     public AddressDto deleteAddress(@PathVariable Long id) {
-		return addressMapper.addressToDto(addressService.delete(id));
+		return addressMapper.addressToDto(addressService.delete(id));		
 	}
 	
 	@PutMapping("/{id}")

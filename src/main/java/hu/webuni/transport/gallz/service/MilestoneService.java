@@ -28,6 +28,10 @@ public class MilestoneService {
 		milestone.setPlannedTime(milestone.getPlannedTime().plusMinutes(delay));
 	}
 	
+	public List<Milestone> findByAddressId(long id) {
+		return milestoneRepository.findByAddressId(id);
+	}
+	
 	@Transactional
 	public void deleteAll() {
 		getAllMilestones().stream().forEach(m -> m.setAddress(null));

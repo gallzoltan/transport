@@ -20,6 +20,9 @@ public class AddressService {
 	
 	@Autowired
 	AddressRepository addressRepository;
+	
+	@Autowired
+	MilestoneService milestoneService;
 
 	public List<Address> getAllAddress(){
 		return addressRepository.findAll();
@@ -36,7 +39,11 @@ public class AddressService {
 
 	@Transactional
 	public Address delete(Long id) {
-		addressRepository.deleteById(id);
+		if (addressRepository.findById(id).isPresent()) {
+			if (!milestoneService.findByAddressId(id).isEmpty())
+				return null;
+			addressRepository.deleteById(id);
+		}
 		return null;
 	}
 	
